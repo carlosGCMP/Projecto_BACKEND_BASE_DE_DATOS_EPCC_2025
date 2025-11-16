@@ -1,4 +1,4 @@
-# Primer Dia de Analisis de la Tesis 8/11/2025
+# Primer Dia de Analisis del projecto 8/11/2025
 ## Descripcion del Analisis 
 - Herramienta de modelado **IBM RATIONAL ROSE**
 - Base de Datos MYSQL pero se usara **POSTGRESQL**
@@ -7,4 +7,7 @@
 ### **IMPORTANTE**
 - Leer el punto *5.6.5* para entenderl el **IBM RATIONAL ROSE**
 - **LEER EL PUNTO 5.7.3 PARA REALIZAR LOS MODELOS LOGICOS Y MODELOS FISICOS**
+# Segundo Dia de Analisis del Projecto 9/11/2025
+## Describcion del Analisis
+
     
