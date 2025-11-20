@@ -10,4 +10,71 @@
 # Segundo Dia de Analisis del Projecto 9/11/2025
 ## Describcion del Analisis
 
+plastitex_backend/
+│
+├── app/
+│   │
+│   ├── main.py                         # Punto de entrada de FastAPI
+│   ├── database.py                     # Configuración PostgreSQL + SessionLocal
+│   ├── config.py                       # Variables de entorno (JWT, DB URL)
+│   │
+│   ├── models/                         # ORM (SQLAlchemy)
+│   │   ├── usuario.py
+│   │   ├── rol.py
+│   │   ├── categoria.py
+│   │   ├── producto.py
+│   │   ├── proveedor.py
+│   │   ├── orden_compra.py
+│   │   ├── detalle_orden_compra.py
+│   │   ├── nota_ingreso.py
+│   │   ├── detalle_nota_ingreso.py
+│   │   ├── nota_salida.py
+│   │   ├── detalle_nota_salida.py
+│   │   └── __init__.py
+│   │
+│   ├── schemas/                        # Pydantic (validaciones)
+│   │   ├── usuario.py
+│   │   ├── rol.py
+│   │   ├── categoria.py
+│   │   ├── producto.py
+│   │   ├── proveedor.py
+│   │   ├── orden_compra.py
+│   │   ├── nota_ingreso.py
+│   │   ├── nota_salida.py
+│   │   └── __init__.py
+│   │
+│   ├── routers/                        # Endpoints (controladores)
+│   │   ├── auth.py
+│   │   ├── usuarios.py
+│   │   ├── categorias.py
+│   │   ├── productos.py
+│   │   ├── proveedores.py
+│   │   ├── ordenes.py
+│   │   ├── notas_ingreso.py
+│   │   ├── notas_salida.py
+│   │   └── __init__.py
+│   │
+│   ├── services/                       # Lógica de negocio (opcional)
+│   │   ├── auth_service.py
+│   │   ├── inventario_service.py
+│   │   └── compras_service.py
+│   │
+│   ├── utils/                          # Utilidades generales
+│   │   ├── security.py                 # JWT, hashing
+│   │   ├── helpers.py                  # Funciones comunes
+│   │   └── pagination.py
+│   │
+│   └── __init__.py
+│
+├── migrations/                         # Alembic (migraciones)
+│
+├── tests/                              # Pruebas automáticas (pytest)
+│   ├── test_productos.py
+│   └── test_auth.py
+│
+├── .env                                # Variables de entorno
+├── requirements.txt
+├── README.md
+└── run.sh                              # Script para ejecutar el servidor (opcional)
+
     
