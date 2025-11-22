@@ -1,19 +1,36 @@
 from pydantic import BaseModel, ConfigDict
-from typing import Optional, List
+from typing import Optional
 
-class RolBase(BaseModel):
+class UsuarioBase(BaseModel):
     nombre: str
+    username: str
+    rol_id: int
 
-class RolCreate(RolBase):
-    pass
+class UsuarioCreate(UsuarioBase):
+    clave: str
 
-class RolUpdate(BaseModel):
+class UsuarioUpdate(BaseModel):
     nombre: Optional[str] = None
+    username: Optional[str] = None
+    rol_id: Optional[int] = None
+    estado: Optional[bool] = None
 
-class RolResponse(RolBase):
+class RolResponse(BaseModel):
     id: int
+    nombre: str
     model_config = ConfigDict(from_attributes=True)
 
-class RolWithUsuarios(RolResponse):
-    usuarios: Optional[List['UsuarioResponse']] = None
+class UsuarioResponse(UsuarioBase):
+    id: int
+    estado: bool
+    rol: Optional[RolResponse] = None
     model_config = ConfigDict(from_attributes=True)
+
+class UsuarioLogin(BaseModel):
+    username: str
+    clave: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    usuario: UsuarioResponse

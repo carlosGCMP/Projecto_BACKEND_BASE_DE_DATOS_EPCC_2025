@@ -2,8 +2,6 @@ from pydantic import BaseModel, ConfigDict
 from typing import Optional, List
 from datetime import date
 
-# ==================== NOTA INGRESO ====================
-
 class DetalleNotaIngresoBase(BaseModel):
     producto_id: int
     cantidad: int
@@ -31,8 +29,6 @@ class NotaIngresoResponse(NotaIngresoBase):
     detalles: Optional[List[DetalleNotaIngresoResponse]] = None
     model_config = ConfigDict(from_attributes=True)
 
-
-# ==================== NOTA SALIDA ====================
 
 class DetalleNotaSalidaBase(BaseModel):
     producto_id: int
