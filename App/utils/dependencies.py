@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthCredentials
+from fastapi.security import HTTPBearer
 from sqlalchemy.orm import Session
 from app.config.database import get_db
 from app.models.usuario import Usuario
@@ -8,14 +8,14 @@ from app.utils.security import decode_access_token
 security = HTTPBearer()
 
 def get_current_user(
-    credentials: HTTPAuthCredentials = Depends(security),
+    token: str = Depends(security),
     db: Session = Depends(get_db)
 ) -> Usuario:
     """
     Dependencia para obtener el usuario actual desde el token JWT
     
     Args:
-        credentials: Credenciales HTTP (Bearer token)
+        token: Token JWT Bearer
         db: Sesión de la base de datos
         
     Returns:
@@ -24,10 +24,14 @@ def get_current_user(
     Raises:
         HTTPException: Si el token es inválido o expiró
     """
-    token = credentials.credentials
+    # Obtener el token (HTTPBearer ya retorna el token directamente)
+    if hasattr(token, 'credentials'):
+        token_str = token.credentials
+    else:
+        token_str = token
     
     # Decodificar token
-    payload = decode_access_token(token)
+    payload = decode_access_token(token_str)
     if not payload:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

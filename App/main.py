@@ -13,7 +13,15 @@ from app.models.notas_ingreso import NotaIngreso, DetalleNotaIngreso
 from app.models.notas_salida import NotaSalida, DetalleNotaSalida
 
 # Crear las tablas
-Base.metadata.create_all(bind=engine)
+try:
+    import ipdb
+    #ipdb.set_trace()
+    Base.metadata.create_all(bind=engine)
+    print("✅ Tablas creadas/verificadas exitosamente")
+except Exception as e:
+    print(f"⚠️ Error al crear tablas: {e}")
+    print("⚠️ Verifica que PostgreSQL esté corriendo y la BD exista")
+    raise
 
 app = FastAPI(
     title="Plastitex API",
@@ -35,10 +43,10 @@ from app.routes import rol, usuario, categoria, producto, proveedor, orden_compr
 
 app.include_router(rol.router, prefix="/api/roles", tags=["Roles"])
 app.include_router(usuario.router, prefix="/api/usuarios", tags=["Usuarios"])
-app.include_router(categoria.router, prefix="/api/categorias", tags=["Categorías"])
+app.include_router(categoria.router, prefix="/api/categorias", tags=["Categorias"])
 app.include_router(producto.router, prefix="/api/productos", tags=["Productos"])
 app.include_router(proveedor.router, prefix="/api/proveedores", tags=["Proveedores"])
-app.include_router(orden_compra.router, prefix="/api/ordenes", tags=["Órdenes de Compra"])
+app.include_router(orden_compra.router, prefix="/api/ordenes", tags=["ordenes de Compra"])
 app.include_router(notas.router, prefix="/api/notas", tags=["Notas"])
 
 @app.get("/")

@@ -1,7 +1,3 @@
-CREATE DATABASE plastitex_db;
-
-\c plastitex_db; ---Pa conectar--
-
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL

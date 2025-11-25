@@ -2,28 +2,34 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
 
 # Cargar variables de entorno
+from dotenv import load_dotenv
 load_dotenv()
 
 # Obtener la URL de la base de datos
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Validar que DATABASE_URL existe
+# Valores por defecto si no está en .env
 if not DATABASE_URL:
-    raise ValueError(
-        "DATABASE_URL no está configurada en el archivo .env. "
-        "Por favor, crea un archivo .env con: DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/plastitex_db"
-    )
+    DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/plastitex_db"
+    print("⚠️ DATABASE_URL no encontrada, usando valor por defecto")
+
+print(f"🔌 Conectando a BD...")
 
 # Crear el engine
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20
-)
+try:
+    engine = create_engine(
+        DATABASE_URL,
+        pool_pre_ping=True,
+        pool_size=10,
+        max_overflow=20,
+        echo=False
+    )
+    print("✅ Engine creado exitosamente")
+except Exception as e:
+    print(f"❌ Error al crear engine: {e}")
+    raise
 
 # Crear la sesión
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
